@@ -66,7 +66,7 @@ var inuitCssModules = [
 ];
 
 /**
- *    Bower Plump package options (prepended with plumpcss-).
+ *    Bower Plump CSS package options (prepended with plumpcss-).
  *    Organise alphabetically within shearing layer category.
  */
 var plumpCssModules = [
@@ -93,19 +93,37 @@ var plumpCssModules = [
 ];
 
 /**
+ *    Bower Plump JS package options (prepended with plumpjs-).
+ *    Organise alphabetically within shearing layer category.
+ */
+var plumpJsModules = [
+	'burger-menu',
+	'google-map',
+	'sticky-header',
+	'svg-fallback',
+	'tabs'
+];
+
+/**
  *    Yeoman generator class. Each method (not starting with _) is
  *    executed in source order.
  */
 module.exports = generator.Base.extend({
 
+	_config : {},
+
 	init: function () {
 		this.pkg = require('../package.json');
 
 		this.on('end', function () {
-			this.log(chalk.magenta.bold('I\'m all done. You now need to run ') +
-					 chalk.green.bold('npm install ') +
-					 chalk.magenta.bold('& ') +
-					 chalk.green.bold('bower install'));
+			this.log(
+				chalk.magenta.bold('I\'m all done. You now need to run ') +
+				chalk.green.bold('composer install') +
+				chalk.magenta.bold(', ') +
+				chalk.green.bold('npm install') +
+				chalk.magenta.bold(' & ') +
+				chalk.green.bold('bower install')
+			);
 		});
 	},
 
@@ -122,11 +140,11 @@ module.exports = generator.Base.extend({
 		this.log(this.yeoman);
 		this.log(chalk.magenta('You\'re using the Plump SilverStripe generator v' + this.pkg.version));
 
-		this.log(chalk.green('Theme:'));
-
-
-
 		var prompts = [{
+			type : 'input',
+			name : 'themeName',
+			message : 'What do you want the theme to be called?'
+		},{
 			type : 'checkbox',
 			name : 'inuitCssModules',
 			message : 'Which Inuit CSS modules do you require?',
@@ -136,11 +154,15 @@ module.exports = generator.Base.extend({
 			name : 'plumpCssModules',
 			message : 'Which PlumpCSS modules do you require?',
 			choices : this._getModuleChoices(plumpCssModules, true)
+		}, {
+			type : 'checkbox',
+			name : 'plumpJsModules',
+			message : 'Which PlumpJS modules do you require?',
+			choices : this._getModuleChoices(plumpJsModules, false)
 		}];
 
 		this.prompt(prompts, function (props) {
-			this.inuitModules = props.inuitModules;
-			this.plumpModules = props.plumpModules;
+			this._config = props;
 			done();
 		}.bind(this));
 
