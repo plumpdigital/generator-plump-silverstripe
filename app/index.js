@@ -8,10 +8,14 @@ var util      = require('util'),
 /**
  *    Plump SilverStripe Composer modules.
  *
- *    Prepended with plumpss- before being added as dependencies to composer.json
+ *    Prepended with plumpss/ before being added as dependencies to composer.json
  */
-var plumpSilversStripeModules = [
-
+var plumpSilverStripeModules = [
+	'analytics',
+	'documents',
+	'menus',
+	'news',
+	'twitter'
 ];
 
 /**
@@ -110,8 +114,6 @@ var plumpJsModules = [
  */
 module.exports = generator.Base.extend({
 
-	_config : {},
-
 	init: function () {
 		this.pkg = require('../package.json');
 
@@ -141,6 +143,11 @@ module.exports = generator.Base.extend({
 		this.log(chalk.magenta('You\'re using the Plump SilverStripe generator v' + this.pkg.version));
 
 		var prompts = [{
+			type : 'checkbox',
+			name : 'plumpSilverStripeModules',
+			message : 'Which Plump SilverStripe modules do you require?',
+			choices : this._getModuleChoices(plumpSilverStripeModules, false)
+		},{
 			type : 'input',
 			name : 'themeName',
 			message : 'What do you want the theme to be called?'
