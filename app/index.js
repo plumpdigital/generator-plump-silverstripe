@@ -18,7 +18,7 @@ var plumpSilversStripeModules = [
  *    Bower Inuit package options (prepended with inuitcss-).
  *    Organise alphabetically within Shearing layer category.
  */
-var inuitModules = [
+var inuitCssModules = [
 
 	// Settings
 	'defaults',
@@ -69,7 +69,7 @@ var inuitModules = [
  *    Bower Plump package options (prepended with plumpcss-).
  *    Organise alphabetically within shearing layer category.
  */
-var plumpModules = [
+var plumpCssModules = [
 
 	// Settings
 	'defaults',
@@ -120,11 +120,44 @@ module.exports = generator.Base.extend({
 
 		// Have Yeoman greet the user.
 		this.log(this.yeoman);
-
-		// replace it with a short and sweet description of your generator
 		this.log(chalk.magenta('You\'re using the Plump SilverStripe generator v' + this.pkg.version));
 
+		this.log(chalk.green('Theme:'));
 
+
+
+		var prompts = [{
+			type : 'checkbox',
+			name : 'inuitCssModules',
+			message : 'Which Inuit CSS modules do you require?',
+			choices : this._getModuleChoices(inuitCssModules, true)
+		},{
+			type : 'checkbox',
+			name : 'plumpCssModules',
+			message : 'Which PlumpCSS modules do you require?',
+			choices : this._getModuleChoices(plumpCssModules, true)
+		}];
+
+		this.prompt(prompts, function (props) {
+			this.inuitModules = props.inuitModules;
+			this.plumpModules = props.plumpModules;
+			done();
+		}.bind(this));
+
+	},
+
+	/**
+	 *    Helper to create a choices array for checkbox prompts.
+	 */
+	_getModuleChoices: function(modules, autoCheck) {
+		var choices = [];
+		for (var i = 0; i < modules.length; i++) {
+			choices[i] = {
+				name    : modules[i],
+				checked : autoCheck
+			};
+		}
+		return choices;
 	}
 
 });
