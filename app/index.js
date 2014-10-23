@@ -162,9 +162,24 @@ module.exports = generator.Base.extend({
 		}];
 
 		this.prompt(prompts, function (props) {
-			this._config = props;
+			this.config = props;
 			done();
 		}.bind(this));
+
+	},
+
+	silverstripeSetup: function() {
+		this.log(chalk.green('Just setting up SilverStripe'));
+
+		// Create directories.
+		this.mkdir('dist/assets/Uploads');
+
+		// Duplicate skeleton theme.
+		this.directory('theme', 'dist/themes/' + this.config.themeName);
+
+		// Create composer config.
+		this.template('_composer.json', 'dist/composer.json');
+
 
 	},
 
