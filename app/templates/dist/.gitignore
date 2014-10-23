@@ -1,0 +1,9 @@
+assets/*
+_ss_environment.php
+silverstripe-cache
+.DS_Store
+vendor/
+cms/
+framework/
+node_modules/
+bower_components/

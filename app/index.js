@@ -186,12 +186,12 @@ module.exports = generator.Base.extend({
 	silverstripeSetup: function() {
 		this.log(chalk.green('Just setting up SilverStripe.'));
 
-		// Create directories.
-		this.mkdir('dist/assets/Uploads');
-
-		// Duplicate skeleton theme and mysite.
+		// Duplicate skeleton site and theme.
+		this.directory('dist', 'dist');
 		this.directory('theme', 'dist/themes/' + this.config.themeName);
-		this.directory('mysite', 'dist/mysite');
+
+		// Create extra empty directories.
+		this.mkdir('dist/assets/Uploads');
 
 		// Create composer config.
 		this.template('_composer.json', 'dist/composer.json');
@@ -206,6 +206,7 @@ module.exports = generator.Base.extend({
 		this.log(chalk.green('Now setting up the front end.'));
 
 		// Create directories.
+
 	},
 
 	/**
