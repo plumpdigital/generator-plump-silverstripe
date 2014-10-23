@@ -143,14 +143,22 @@ module.exports = generator.Base.extend({
 		this.log(chalk.magenta('You\'re using the Plump SilverStripe generator v' + this.pkg.version));
 
 		var prompts = [{
+			type : 'input',
+			name : 'databaseName',
+			message : 'What do you want the database to be called?',
+			filter : this._filterLowercase
+		},
+		{
 			type : 'checkbox',
 			name : 'plumpSilverStripeModules',
 			message : 'Which Plump SilverStripe modules do you require?',
 			choices : this._getModuleChoices(plumpSilverStripeModules, false)
-		},{
+		},
+		{
 			type : 'input',
 			name : 'themeName',
-			message : 'What do you want the theme to be called?'
+			message : 'What do you want the theme to be called?',
+			filter : this._filterLowercase
 		},{
 			type : 'checkbox',
 			name : 'inuitCssModules',
@@ -176,18 +184,28 @@ module.exports = generator.Base.extend({
 	},
 
 	silverstripeSetup: function() {
-		this.log(chalk.green('Just setting up SilverStripe'));
+		this.log(chalk.green('Just setting up SilverStripe.'));
 
 		// Create directories.
 		this.mkdir('dist/assets/Uploads');
 
-		// Duplicate skeleton theme.
+		// Duplicate skeleton theme and mysite.
 		this.directory('theme', 'dist/themes/' + this.config.themeName);
+		this.directory('mysite', 'dist/mysite');
 
 		// Create composer config.
 		this.template('_composer.json', 'dist/composer.json');
 
+		// Create SilverStripe configuration.
+		this.template('_config.yml', 'dist/mysite/_config/config.yml');
+		this.template('_config.php', 'dist/mysite/_config.php');
 
+	},
+
+	frontEndSetup: function() {
+		this.log(chalk.green('Now setting up the front end.'));
+
+		// Create directories.
 	},
 
 	/**
@@ -202,6 +220,10 @@ module.exports = generator.Base.extend({
 			};
 		}
 		return choices;
+	},
+
+	_filterLowercase: function(str) {
+		return str.toLowerCase();
 	}
 
 });
