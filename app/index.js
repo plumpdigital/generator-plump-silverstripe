@@ -121,10 +121,9 @@ module.exports = generator.Base.extend({
 			this.log(
 				chalk.magenta.bold('I\'m all done. You now need to run ') +
 				chalk.green.bold('composer install') +
-				chalk.magenta.bold(', ') +
-				chalk.green.bold('npm install') +
-				chalk.magenta.bold(' & ') +
-				chalk.green.bold('bower install')
+				chalk.magenta.bold(' in dist/ and ') +
+				chalk.green.bold('npm install && bower install') +
+				chalk.magenta.bold(' in src/')
 			);
 		});
 	},
