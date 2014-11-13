@@ -104,58 +104,27 @@ gulp.task('styles', function() {
 });
 
 /**
- *    Template rendering tasks. Compiles Swig template into HTML
- *    in /dev and /dist
- *
- * 1. Disable Swig caching. Without this, any task that continues to
- *    run (e.g. watch / serve) will re-use the memory-cached compiled
- *    template and not reflect any changes.
- * 2. Set 'dist' so that it can be checked within the template.
- * 3. Return the merged stream. This allows us to have two disparate stream
- *    tasks for dev/dist doing slightly different things.
- */
-gulp.task('templates', function() {
-
-	var dev = gulp.src(config.files.templates)
-		.pipe(swig({
-			defaults : { cache : false } /* [1] */
-		}))
-		.pipe(gulp.dest('dev/'));
-
-	var dist = gulp.src(config.files.templates)
-		.pipe(swig({
-			defaults : { cache : false }, /* [1] */
-			data : {
-				dist : true /* [2] */
-			}
-		}))
-		.pipe(gulp.dest('dist/'));
-
-	return merge(dev, dist); /* [3] */
-});
-
-/**
  *    Image optimsation task.
  *
  * 1. Determine whether to use imagemin or do nothing (noop).
  * 2. Use files defined in files.images config.
- * 3. Filter to only images that are newer than in dev/images
- * 4. Output optimised to dev/images
- * 5. Output optimised to build/images
+ * 3. Filter to only images that are newer than in the destination.
+ * 4. Output optimised images.
  */
 gulp.task('images', function() {
 
-	var imagemin = config.minifyImages ? imagemin({
+	var outputDirectory = themeDirectory + 'images/';
+
+	var imageminPipe = config.minifyImages ? imagemin({
 		optimizationLevel : 3,
 		progressive : true,
 		interlaced : true
 	}) : gutil.noop(); /* [1] */
 
 	return gulp.src(config.files.images) /* [2] */
-		.pipe(newer('dev/images')) /* [3] */
-		.pipe(imagemin)
-		.pipe(gulp.dest('dev/images')) /* [4] */
-		.pipe(gulp.dest('dist/images')); /* [5] */
+		.pipe(newer(outputDirectory)) /* [3] */
+		.pipe(imageminPipe)
+		.pipe(gulp.dest(outputDirectory)); /* [4] */
 
 });
 
