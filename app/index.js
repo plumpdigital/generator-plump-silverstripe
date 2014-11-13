@@ -121,7 +121,7 @@ module.exports = generator.Base.extend({
 			this.log(
 				chalk.magenta.bold('I\'m all done. You now need to run ') +
 				chalk.green.bold('composer install') +
-				chalk.magenta.bold(' in dist/ and ') +
+				chalk.magenta.bold(' in build/ and ') +
 				chalk.green.bold('npm install && bower install') +
 				chalk.magenta.bold(' in src/')
 			);
@@ -186,18 +186,18 @@ module.exports = generator.Base.extend({
 		this.log(chalk.green('Just setting up SilverStripe.'));
 
 		// Duplicate skeleton site and theme.
-		this.directory('dist', 'dist');
-		this.directory('theme', 'dist/themes/' + this.config.themeName);
+		this.directory('build', 'build');
+		this.directory('theme', 'build/themes/' + this.config.themeName);
 
 		// Create extra empty directories.
-		this.mkdir('dist/assets/Uploads');
+		this.mkdir('build/assets/Uploads');
 
 		// Create composer config.
-		this.template('_composer.json', 'dist/composer.json');
+		this.template('_composer.json', 'build/composer.json');
 
 		// Create SilverStripe configuration.
-		this.template('_config.yml', 'dist/mysite/_config/config.yml');
-		this.template('_config.php', 'dist/mysite/_config.php');
+		this.template('_config.yml', 'build/mysite/_config/config.yml');
+		this.template('_config.php', 'build/mysite/_config.php');
 
 	},
 
