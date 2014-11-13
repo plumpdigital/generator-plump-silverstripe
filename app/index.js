@@ -204,7 +204,16 @@ module.exports = generator.Base.extend({
 	frontEndSetup: function() {
 		this.log(chalk.green('Now setting up the front end.'));
 
-		// Create directories.
+		// Duplicate skeleton src directory.
+		this.directory('src', 'src');
+
+		// Template the NPM and Bower config for the UI
+		this.template('_package.json', 'package.json');
+		this.template('_bower.json', 'bower.json');
+
+		// Copy Gulpfile and template Gulp config.
+		this.copy('gulp/gulpfile.js', 'gulpfile.js');
+		this.template('gulp/_gulp-config.json', 'gulp-config.json');
 
 	},
 
