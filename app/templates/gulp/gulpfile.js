@@ -134,8 +134,11 @@ gulp.task('images', function() {
  *    Clean task. Deletes the dev/ and dist/ directories.
  */
 gulp.task('clean', function(callback) {
-	return rimraf('./dev', function() {
-		rimraf('./dist', callback)
+	// TODO reduce chaining if possible.
+	return rimraf(themeDirectory + 'styles/', function() {
+		rimraf(themeDirectory + 'scripts/', function() {
+			rimraf(themeDirectory + 'images/', callback)
+		})
 	});
 });
 
@@ -158,7 +161,6 @@ gulp.task('copy', function() {
  * 1. Any changes to any files from files.watchStyles config starts styles task.
  * 2. Any changes to any files from files.scripts config starts scripts task.
  * 3. Any changes to any files from files.images config starts images task.
- * 4. Any changes to any files from files.watchTemplates starts templates task.
  */
 gulp.task('watch', function() {
 
@@ -168,41 +170,10 @@ gulp.task('watch', function() {
 
 	gulp.watch(config.files.images, ['images']); /* [3] */
 
-	gulp.watch(config.files.watchTemplates, ['templates']); /* [4] */
-
 });
 
-/**
- *    Serve task. Starts a server to serve /dist statically.
- *
- * 1. Listen on the port defined by the constant above.
- * 2. Open the new server URL in the default browser.
- */
-gulp.task('serve', function() {
 
-	var server = express();
-	server.use(express.static(__dirname + '/dist'));
-	server.listen(DIST_SERVER_PORT); /* [1] */
 
-	open('http://localhost:' + DIST_SERVER_PORT); /* [2] */
-
-});
-
-/**
- *    Stage task. Builds then uploads the contents of dist/ to an FTP site
- *    using values from stage config.
- */
-gulp.task('stage', ['build'], function() {
-
-	return gulp.src('dist/**/*')
-		.pipe(ftp({
-			host : config.stage.host,
-			user : config.stage.user,
-			pass : config.stage.password,
-			remotePath : config.stage.remotePath
-		}));
-
-});
 
 /**
  *    Develop task. Sets up watches and serves up /dev using
@@ -243,7 +214,7 @@ gulp.task('develop', ['build', 'watch'] /* [1] */, function() {
  *    the Gulp callback to runsequence so that the task can complete correctly.
  */
 gulp.task('build', function(callback) {
-	runsequence('clean', ['images', 'templates', 'styles', 'scripts', 'copy'], callback);
+	runsequence('clean', ['images', 'styles', 'scripts', 'copy'], callback);
 });
 
 /**
@@ -255,13 +226,12 @@ gulp.task('default', function() {
 		magenta = gutil.colors.magenta;
 
 	gutil.log(magenta('----------'));
-	gutil.log(magenta('Plump Gulp'));
+	gutil.log(magenta('Plump SilverStripe Theme Gulp'));
 
 	gutil.log('The following tasks are available:');
 
-	gutil.log(cyan('build') + ': builds the contents of src/ to both dev/ and dist/');
-	gutil.log(cyan('develop') + ': performs an initial build, sets up watches and serves up a LiveReload enabled web server');
-	gutil.log(cyan('serve') + ': serves the contents of /dist on a static web server');
+	gutil.log(cyan('build') + ': builds the contents of src/ to the SilverStripe theme directory.');
+	gutil.log(cyan('develop') + ': performs an initial build then sets up watches.');
 
 	gutil.log(magenta('----------'));
 
