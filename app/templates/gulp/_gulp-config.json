@@ -15,6 +15,6 @@
 		"password"   : "",
 		"remotePath" : ""
 	},
-	"miniftyImages"  : true,
+	"minifyImages"   : true,
 	"themeDirectory" : "build/themes/<%= config.themeName %>/"
 }
