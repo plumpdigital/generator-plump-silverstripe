@@ -22,4 +22,10 @@ HtmlEditorConfig::get('cms')->setOption('theme_advanced_styles', 'Lede=lede');
 
 // Improve GD image resample quality.
 
-GD::set_default_quality(100);
+GD::set_default_quality(80);
+
+// Add LiveReload if on dev.
+
+if (Director::isDev()) {
+	Requirements::javascript('http://localhost:35729/livereload.js?snipver=1');
+}
