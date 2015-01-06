@@ -201,6 +201,13 @@ module.exports = generator.Base.extend({
 
 	},
 
+	environmentSetup: function() {
+		this.log(chalk.green('Setting up the Vagrant development environment.'));
+
+		this.directory('environment', 'environment');
+		this.copy('Vagrantfile', 'Vagrantfile');
+	},
+
 	frontEndSetup: function() {
 		this.log(chalk.green('Now setting up the front end.'));
 
