@@ -181,28 +181,15 @@ gulp.task('watch', function() {
  *
  * 1. Initial run of build and watch.
  * 2. LiveReload server listens on the port specified above.
- * 3. Inform the LiveReload server of any change in /dev
- * 4. Injects the LiveReload JS automatically.
- * 5. Dev web server listens on the port specified above.
- * 6. Automatically open the new server URL in the default browser.
+ * 3. Inform the LiveReload server of any change in the theme directory.
  */
 gulp.task('develop', ['build', 'watch'] /* [1] */, function() {
 
-	var lr = livereload(LIVERELOAD_PORT);
+	var lr = livereload(LIVERELOAD_PORT); /* [2] */
 
-	gulp.watch('dev/**/*').on('change', function(file) { /* [3] */
+	gulp.watch(themeDirectory + '/**/*').on('change', function(file) { /* [3] */
 		lr.changed(file.path);
 	});
-
-	//start web server
-	var server = express();
-	server.use(require('connect-livereload')({ port : LIVERELOAD_PORT })); /* [4] */
-	server.use(express.static(__dirname + '/dev'));
-	server.listen(DEV_SERVER_PORT); /* [5] */
-
-	if (argv.open !== false) {
-		open('http://localhost:' + DEV_SERVER_PORT); /* [6] */
-	}
 
 });
 
