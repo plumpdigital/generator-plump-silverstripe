@@ -194,6 +194,7 @@ module.exports = generator.Base.extend({
 
 		// Create composer config.
 		this.template('_composer.json', 'build/composer.json');
+		this.template('_ss_environment.php', '_ss_environment.php');
 
 		// Create SilverStripe configuration.
 		this.template('_config.yml', 'build/mysite/_config/config.yml');
