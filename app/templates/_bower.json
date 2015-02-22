@@ -1,0 +1,13 @@
+{
+  "name": "<%= _.slugify(appname) %>",
+  "version": "0.0.0",
+  "dependencies": {
+  	<% for (var i = 0, l = config.inuitCssModules.length; i < l; i++) { %>
+  		"inuit-<%= config.inuitCssModules[i] %>" : "latest",
+  	<% } %>
+  	<% for (var i = 0, l = config.plumpCssModules.length; i < l; i++) { %>
+  		"plumpcss-<%= config.plumpCssModules[i] %>" : "latest"<% if (i < l - 1) { %>,<% } %>
+  	<% } %>
+  }
+}
+
