@@ -1,0 +1,10 @@
+node_modules
+bower_components
+.sass-cache
+.DS_Store
+.project
+*.sublime-project
+.vagrant
+build/themes/<%= config.themeName %>/css
+build/themes/<%= config.themeName %>/js
+build/themes/<%= config.themeName %>/images
