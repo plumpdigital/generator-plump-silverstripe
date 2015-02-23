@@ -5,5 +5,3 @@ silverstripe-cache
 vendor/
 cms/
 framework/
-node_modules/
-bower_components/
