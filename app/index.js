@@ -219,8 +219,8 @@ module.exports = generator.Base.extend({
 		this.template('_package.json', 'package.json');
 		this.template('_bower.json', 'bower.json');
 
-		// Copy other configuration.
-		this.copy('.gitignore', '.gitignore');
+		// Template other configuration.
+		this.template('_gitignore', '.gitignore');
 
 		// Copy Gulpfile and template Gulp config.
 		this.copy('gulp/gulpfile.js', 'gulpfile.js');
