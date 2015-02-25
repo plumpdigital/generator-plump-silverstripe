@@ -23,7 +23,11 @@
 	</head>
 	<body>
 
+		<% include PageHead %>
+
 		$Layout
+
+		<% include PageFoot %>
 
 	</body>
 </html>
