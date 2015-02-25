@@ -60,7 +60,7 @@ var LIVERELOAD_PORT 	= 35729;
  */
 gulp.task('scripts', function() {
 
-	var outputDirectory = themeDirectory + 'scripts/';
+	var outputDirectory = themeDirectory + 'js/';
 
 	return gulp.src(config.files.scripts) /* [1] */
 		.pipe(jshint()) /* [2] */
@@ -90,7 +90,7 @@ gulp.task('scripts', function() {
 
 gulp.task('styles', function() {
 
-	var outputDirectory = themeDirectory + 'styles/';
+	var outputDirectory = themeDirectory + 'css/';
 
 	return gulp.src(config.files.styles) /* [1] */
 		.pipe(plumber(onError)) /* [2] */
@@ -135,10 +135,10 @@ gulp.task('images', function() {
  */
 gulp.task('clean', function(callback) {
 	// TODO reduce chaining if possible.
-	return rimraf(themeDirectory + 'styles/', function() {
-		rimraf(themeDirectory + 'scripts/', function() {
-			rimraf(themeDirectory + 'images/', callback)
-		})
+	return rimraf(themeDirectory + 'css/', function() {
+		rimraf(themeDirectory + 'js/', function() {
+			rimraf(themeDirectory + 'images/', callback);
+		});
 	});
 });
 
