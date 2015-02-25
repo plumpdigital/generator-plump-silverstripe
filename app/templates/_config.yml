@@ -1,0 +1,9 @@
+---
+Name: mysite
+After:
+  - 'framework/*'
+  - 'cms/*'
+---
+# YAML configuration for SilverStripe
+SSViewer:
+  theme: '<%= config.themeName %>'

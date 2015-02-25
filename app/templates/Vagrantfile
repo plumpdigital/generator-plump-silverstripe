@@ -1,0 +1,72 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # All Vagrant configuration is done here. The most common configuration
+  # options are documented and commented below. For a complete reference,
+  # please see the online documentation at vagrantup.com.
+
+  # Using the Puppet CentOS 6.5 box (http://puppet-vagrant-boxes.puppetlabs.com/).
+  # This is the closest to our hosting platform, to minimise environment fragmentation.
+  config.vm.box = "centos-65-x64-virtualbox-nocm"
+  config.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-nocm.box"
+
+  # By default, VirtualBox shares files between the host and guest operating systems
+  # using its own built-in sharing mechanism. While this method works across all types of hosts,
+  # it's incredibly slow, at least on Unix hosts. The solution is to use NFS, which is much faster.
+  # Required for NFS to work, pick any local IP
+  config.vm.network :private_network, ip: '192.168.50.50'
+  # Use NFS for shared folders for better performance
+  config.vm.synced_folder '.', '/vagrant', nfs: true
+
+  # How to make Vagrant performance not suck
+  # Set values based on each individual host system:
+  config.vm.provider "virtualbox" do |v|
+    host = RbConfig::CONFIG['host_os']
+
+    # Give VM 1/4 system memory & access to all cpu cores on the host
+    if host =~ /darwin/
+      cpus = `sysctl -n hw.ncpu`.to_i
+      # sysctl returns Bytes and we need to convert to MB
+      mem = `sysctl -n hw.memsize`.to_i / 1024 / 1024 / 4
+    elsif host =~ /linux/
+      cpus = `nproc`.to_i
+      # meminfo shows KB and we need to convert to MB
+      mem = `grep 'MemTotal' /proc/meminfo | sed -e 's/MemTotal://' -e 's/ kB//'`.to_i / 1024 / 4
+    else # sorry Windows folks, I can't help you
+      cpus = 2
+      mem = 1024
+    end
+
+    v.customize ["modifyvm", :id, "--memory", mem]
+    v.customize ["modifyvm", :id, "--cpus", cpus]
+  end
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine. In the example below,
+  # accessing "localhost:8080" will access port 80 on the guest machine.
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  # config.vm.network "private_network", ip: "192.168.33.10"
+
+  # Create a public network, which generally matched to bridged network.
+  # Bridged networks make the machine appear as another physical device on
+  # your network.
+  # config.vm.network "public_network"
+
+  # Install Apache, MySQL, PHP and Silverstripe-supporting libraries.
+
+  config.vm.provision :shell, :path => "environment/scripts/apache.sh"
+  config.vm.provision :shell, :path => "environment/scripts/php.sh"
+  config.vm.provision :shell, :path => "environment/scripts/mysql.sh"
+
+  config.vm.provision :shell, :path => "environment/scripts/composer.sh"
+
+  config.vm.provision :shell, :path => "environment/scripts/start-services.sh", :run => "always"
+
+end
