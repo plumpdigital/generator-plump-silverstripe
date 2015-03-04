@@ -1,7 +1,7 @@
 {
 	"files" : {
 		"scripts"        : "src/scripts/*.js",
-		"styles"         : "src/styles/style.scss",
+		"styles"         : "src/styles/*.scss",
 		"watchStyles"    : "src/styles/**/*.scss",
 		"images"         : "src/images/**/*",
 		"templates"      : "src/*.html",
