@@ -65,8 +65,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, :path => "environment/scripts/php.sh"
   config.vm.provision :shell, :path => "environment/scripts/mysql.sh"
 
-  config.vm.provision :shell, :path => "environment/scripts/composer.sh"
-
   config.vm.provision :shell, :path => "environment/scripts/start-services.sh", :run => "always"
 
 end
