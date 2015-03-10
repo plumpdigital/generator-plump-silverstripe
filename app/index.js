@@ -11,11 +11,9 @@ var util      = require('util'),
  *    Prepended with plumpss/ before being added as dependencies to composer.json
  */
 var plumpSilverStripeModules = [
-	'analytics',
 	'documents',
 	'menus',
-	'news',
-	'twitter'
+	'news'
 ];
 
 /**
