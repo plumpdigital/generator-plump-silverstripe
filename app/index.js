@@ -140,12 +140,6 @@ module.exports = generator.Base.extend({
 		this.log(chalk.magenta('You\'re using the Plump SilverStripe generator v' + this.pkg.version));
 
 		var prompts = [{
-			type : 'input',
-			name : 'databaseName',
-			message : 'What do you want the database to be called?',
-			filter : this._filterLowercase
-		},
-		{
 			type : 'checkbox',
 			name : 'plumpSilverStripeModules',
 			message : 'Which Plump SilverStripe modules do you require?',
@@ -192,9 +186,9 @@ module.exports = generator.Base.extend({
 
 		// Create composer config.
 		this.template('_composer.json', 'build/composer.json');
-		this.template('_ss_environment.php', '_ss_environment.php');
 
 		// Create SilverStripe configuration.
+		this.copy('_ss_environment.php', '_ss_environment.php');
 		this.template('_config.yml', 'build/mysite/_config/config.yml');
 		this.template('_config.php', 'build/mysite/_config.php');
 
