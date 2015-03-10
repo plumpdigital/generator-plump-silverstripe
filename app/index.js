@@ -88,6 +88,7 @@ var plumpCssModules = [
 	'exhibit',
 	'meter',
 	'stack',
+	'widescreen-frame',
 	'wrapper',
 
 	// Trumps
