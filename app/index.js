@@ -30,6 +30,7 @@ var inuitCssModules = [
 	'functions',
 	'mixins',
 	'responsive-tools',
+	'widths',
 
 	// Generic
 	'box-sizing',
@@ -60,6 +61,7 @@ var inuitCssModules = [
 
 	// Trumps
 	'clearfix',
+	'headings-trumps',
 	'print',
 	'spacing',
 	'spacing-responsive',
@@ -75,22 +77,24 @@ var plumpCssModules = [
 
 	// Settings
 	'defaults',
+	'settings-responsive',
 
 	// Tools
+	'functions',
 	'mixins',
 
 	// Objects
 	'band',
-	'band-responsive',
 	'exhibit',
 	'meter',
-	'nav-list',
 	'stack',
 	'wrapper',
 
 	// Trumps
 	'floats',
+	'floats-responsive',
 	'hide',
+	'hide-responsive',
 	'text-align'
 ];
 

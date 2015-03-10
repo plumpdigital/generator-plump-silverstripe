@@ -185,10 +185,10 @@ gulp.task('watch', function() {
  */
 gulp.task('develop', ['build', 'watch'] /* [1] */, function() {
 
-	var lr = livereload(LIVERELOAD_PORT); /* [2] */
+	livereload.listen(LIVERELOAD_PORT); /* [2] */
 
 	gulp.watch(themeDirectory + '/**/*').on('change', function(file) { /* [3] */
-		lr.changed(file.path);
+		livereload.changed(file.path);
 	});
 
 });
