@@ -96,7 +96,8 @@ var plumpCssModules = [
 	'floats-responsive',
 	'hide',
 	'hide-responsive',
-	'text-align'
+	'text-align',
+	'text-align-responsive'
 ];
 
 /**
