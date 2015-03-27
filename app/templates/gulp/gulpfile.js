@@ -204,7 +204,7 @@ gulp.task('develop', ['build', 'watch'] /* [1] */, function() {
 
 	livereload.listen(LIVERELOAD_PORT); /* [2] */
 
-	gulp.watch(themeDirectory + '/**/*').on('change', livereload.changed);
+	gulp.watch(themeDirectory + '/**/*').on('change', livereload.changed); /* [3] */
 
 });
 
