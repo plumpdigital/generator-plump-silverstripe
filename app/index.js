@@ -207,6 +207,14 @@ module.exports = generator.Base.extend({
 		this.copy('Vagrantfile', 'Vagrantfile');
 	},
 
+	toolsSetup: function() {
+		this.log(chalk.green('Setting up additional tools.'));
+
+		this.directory('test-data', 'test-data');
+		this.copy('dbdump', 'dbdump');
+		this.copy('dbrebuild', 'dbrebuild');
+	},
+
 	frontEndSetup: function() {
 		this.log(chalk.green('Now setting up the front end.'));
 
