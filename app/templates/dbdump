@@ -1,0 +1,2 @@
+echo 'Connecting to Vagrant VM.'
+vagrant ssh -c '/vagrant/test-data/dbdump.sh'

@@ -17,8 +17,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta http-equiv="cleartype" content="on" />
 
-		<link rel="stylesheet" type="text/css" href="$ThemeDir/css/style.min.css" />
-
 		$MetaTags(false)
 	</head>
 	<body>

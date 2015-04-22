@@ -88,6 +88,7 @@ var plumpCssModules = [
 	'exhibit',
 	'meter',
 	'stack',
+	'widescreen-frame',
 	'wrapper',
 
 	// Trumps
@@ -95,7 +96,8 @@ var plumpCssModules = [
 	'floats-responsive',
 	'hide',
 	'hide-responsive',
-	'text-align'
+	'text-align',
+	'text-align-responsive'
 ];
 
 /**
@@ -203,6 +205,14 @@ module.exports = generator.Base.extend({
 
 		this.directory('environment', 'environment');
 		this.copy('Vagrantfile', 'Vagrantfile');
+	},
+
+	toolsSetup: function() {
+		this.log(chalk.green('Setting up additional tools.'));
+
+		this.directory('test-data', 'test-data');
+		this.copy('dbdump', 'dbdump');
+		this.copy('dbrebuild', 'dbrebuild');
 	},
 
 	frontEndSetup: function() {
