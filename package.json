@@ -1,7 +1,7 @@
 
 {
 	"name": "generator-plump-silverstripe",
-	"version": "0.2.3",
+	"version": "0.2.4",
 	"description": "Plump Yeoman generator for SilverStripe projects using Plump CSS and Inuit front-end modules.",
 	"license": "MIT",
 	"repository": "plumpdigital/generator-plump-silverstripe",
