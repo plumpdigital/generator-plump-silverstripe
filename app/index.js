@@ -155,7 +155,8 @@ module.exports = generator.Base.extend({
 			type : 'input',
 			name : 'themeName',
 			message : 'What do you want the theme to be called?',
-			filter : this._filterLowercase
+			filter : this._filterLowercase,
+			default: this.appname
 		},{
 			type : 'checkbox',
 			name : 'inuitCssModules',
@@ -205,6 +206,14 @@ module.exports = generator.Base.extend({
 
 		this.directory('environment', 'environment');
 		this.copy('Vagrantfile', 'Vagrantfile');
+	},
+
+	toolsSetup: function() {
+		this.log(chalk.green('Setting up additional tools.'));
+
+		this.directory('test-data', 'test-data');
+		this.copy('dbdump', 'dbdump');
+		this.copy('dbrebuild', 'dbrebuild');
 	},
 
 	frontEndSetup: function() {

@@ -23,6 +23,8 @@ class Page_Controller extends ContentController {
 
 	public function init() {
 		parent::init();
+		Requirements::css("{$this->ThemeDir()}/css/style.min.css", 'screen,projection');
+		Requirements::javascript("{$this->ThemeDir()}/js/main.min.js");
 	}
 
 }
