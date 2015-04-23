@@ -77,7 +77,7 @@ var plumpCssModules = [
 
 	// Settings
 	'defaults',
-	'settings-responsive',
+	'responsive-settings',
 
 	// Tools
 	'functions',
@@ -93,11 +93,11 @@ var plumpCssModules = [
 
 	// Trumps
 	'floats',
-	'floats-responsive',
+	'responsive-floats',
 	'hide',
-	'hide-responsive',
+	'responsive-hide',
 	'text-align',
-	'text-align-responsive'
+	'responsive-text-align'
 ];
 
 /**
