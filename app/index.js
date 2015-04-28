@@ -146,29 +146,30 @@ module.exports = generator.Base.extend({
 		this.log(chalk.magenta('You\'re using the Plump SilverStripe generator v' + this.pkg.version));
 
 		var prompts = [{
-			type : 'checkbox',
-			name : 'plumpSilverStripeModules',
+			type    : 'checkbox',
+			name    : 'plumpSilverStripeModules',
 			message : 'Which Plump SilverStripe modules do you require?',
 			choices : this._getModuleChoices(plumpSilverStripeModules, false)
 		},
 		{
-			type : 'input',
-			name : 'themeName',
+			type    : 'input',
+			name    : 'themeName',
 			message : 'What do you want the theme to be called?',
-			filter : this._filterLowercase
+			filter  : this._filterLowercase,
+			default : this.appname
 		},{
-			type : 'checkbox',
-			name : 'inuitCssModules',
+			type    : 'checkbox',
+			name    : 'inuitCssModules',
 			message : 'Which Inuit CSS modules do you require?',
 			choices : this._getModuleChoices(inuitCssModules, true)
 		},{
-			type : 'checkbox',
-			name : 'plumpCssModules',
+			type    : 'checkbox',
+			name    : 'plumpCssModules',
 			message : 'Which PlumpCSS modules do you require?',
 			choices : this._getModuleChoices(plumpCssModules, true)
 		}, {
-			type : 'checkbox',
-			name : 'plumpJsModules',
+			type    : 'checkbox',
+			name    : 'plumpJsModules',
 			message : 'Which PlumpJS modules do you require?',
 			choices : this._getModuleChoices(plumpJsModules, false)
 		}];
