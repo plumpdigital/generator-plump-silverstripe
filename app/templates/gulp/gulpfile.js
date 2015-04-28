@@ -22,8 +22,7 @@ var concat       = require('gulp-concat'),
 	imagemin     = require('gulp-imagemin'),
 	newer        = require('gulp-newer'),
 	insert       = require('gulp-insert'),
-	livereload   = require('gulp-livereload'),
-	ftp          = require('gulp-ftp');
+	livereload   = require('gulp-livereload');
 
 //    Load external config.
 var config = require('./gulp-config.json'),
