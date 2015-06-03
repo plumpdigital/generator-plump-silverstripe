@@ -159,18 +159,6 @@ gulp.task('clean', function(callback) {
 });
 
 /**
- *    Copy task. Copies over any files that are not part of other tasks
- *    (e.g. HTML pages, JS libraries) to both /dev and /dist
- *
- * 1. Change the base path to avoid copying top-level directories.
- */
-gulp.task('copy', function() {
-	return gulp.src(config.files.copy, { base : config.copyBase }) /* [1] */
-		.pipe(gulp.dest('dev'))
-		.pipe(gulp.dest('dist'));
-});
-
-/**
  *    Watch task. Sets up several watchers. Using different config for styles and
  *    templates as they have partials that need watching but not compiling.
  *
@@ -215,7 +203,7 @@ gulp.task('develop', ['build', 'watch'] /* [1] */, function() {
  *    the Gulp callback to runsequence so that the task can complete correctly.
  */
 gulp.task('build', function(callback) {
-	runsequence('clean', ['images', 'styles', 'scripts', 'copy'], callback);
+	runsequence('clean', ['images', 'styles', 'scripts'], callback);
 });
 
 /**

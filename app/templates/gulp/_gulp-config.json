@@ -5,9 +5,7 @@
 		"watchStyles"    : "src/styles/**/*.scss",
 		"images"         : "src/images/**/*",
 		"templates"      : "src/*.html",
-		"watchTemplates" : "src/**/*.html",
-		"copy"           : "src/copy/**/*",
-		"copyBase"       : "src/copy"
+		"watchTemplates" : "src/**/*.html"
 	},
 	"stage" : {
 		"host"       : "",
