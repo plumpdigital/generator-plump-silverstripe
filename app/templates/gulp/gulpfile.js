@@ -22,7 +22,8 @@ var concat       = require('gulp-concat'),
 	imagemin     = require('gulp-imagemin'),
 	newer        = require('gulp-newer'),
 	insert       = require('gulp-insert'),
-	livereload   = require('gulp-livereload');
+	livereload   = require('gulp-livereload'),
+	ftp          = require('gulp-ftp');
 
 //    Load external config.
 var config = require('./gulp-config.json'),
@@ -145,9 +146,7 @@ gulp.task('images', function() {
 });
 
 /**
- *    Copy task. Copies over any files that are not part of other tasks
- *    (e.g. HTML pages) to both /dev and /dist
- *    Clean task. Deletes the dev/ and dist/ directories.
+ *    Clean task. Deletes theme assets.
  */
 gulp.task('clean', function(callback) {
 	// TODO reduce chaining if possible.
@@ -156,18 +155,6 @@ gulp.task('clean', function(callback) {
 			rimraf(themeDirectory + 'images/', callback);
 		});
 	});
-});
-
-/**
- *    Copy task. Copies over any files that are not part of other tasks
- *    (e.g. HTML pages, JS libraries) to both /dev and /dist
- *
- * 1. Change the base path to avoid copying top-level directories.
- */
-gulp.task('copy', function() {
-	return gulp.src(config.files.copy, { base : config.copyBase }) /* [1] */
-		.pipe(gulp.dest('dev'))
-		.pipe(gulp.dest('dist'));
 });
 
 /**
@@ -215,7 +202,7 @@ gulp.task('develop', ['build', 'watch'] /* [1] */, function() {
  *    the Gulp callback to runsequence so that the task can complete correctly.
  */
 gulp.task('build', function(callback) {
-	runsequence('clean', ['images', 'styles', 'scripts', 'copy'], callback);
+	runsequence('clean', ['images', 'styles', 'scripts'], callback);
 });
 
 /**
