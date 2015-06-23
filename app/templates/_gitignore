@@ -5,6 +5,7 @@ bower_components
 .project
 *.sublime-project
 .vagrant
+test-data/Uploads/_resampled
 build/themes/<%= config.themeName %>/css
 build/themes/<%= config.themeName %>/js
 build/themes/<%= config.themeName %>/images
