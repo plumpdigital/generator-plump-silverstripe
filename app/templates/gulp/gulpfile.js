@@ -17,6 +17,7 @@ var concat       = require('gulp-concat'),
 	rename       = require('gulp-rename'),
 	swig         = require('gulp-swig'),
 	sass         = require('gulp-sass'),
+	scsslint     = require('gulp-scss-lint'),
 	autoprefixer = require('gulp-autoprefixer'),
 	minifycss    = require('gulp-minify-css'),
 	imagemin     = require('gulp-imagemin'),
@@ -106,6 +107,9 @@ gulp.task('scripts', function() {
  	var outputDirectory = themeDirectory + 'css/';
 
  	return gulp.src(config.files.styles) /* [1] */
+ 		.pipe(scsslint({
+ 			'config': '.scss-lint.yml'
+ 		}))
  		.pipe(sass({  /* [2] */
  			style : 'expanded',
  			onError: injectError
