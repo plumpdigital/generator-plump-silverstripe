@@ -231,6 +231,7 @@ module.exports = generator.Base.extend({
 
 		// Template other configuration.
 		this.template('_gitignore', '.gitignore');
+		this.template('_scss-lint.yml', '.scss-lint.yml');
 
 		// Copy Gulpfile and template Gulp config.
 		this.copy('gulp/gulpfile.js', 'gulpfile.js');
