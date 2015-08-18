@@ -4,9 +4,12 @@
 	"require": {
 		"php": ">=5.3.2",
 		"silverstripe/cms": "3.1.6",
-		"silverstripe/framework": "3.1.6"<% if (config.plumpSilverStripeModules && config.plumpSilverStripeModules.length > 0) { %>,<% } %>
+		"silverstripe/framework": "3.1.6"
 		<% for (var i = 0, l = config.plumpSilverStripeModules.length; i < l; i++) { %>
-  			"plumpss/<%= config.plumpSilverStripeModules[i] %>" : "dev-master"<% if (i < l - 1) { %>,<% } %>
+  			<% if (i == 0) { %>,<% } %>"plumpss/<%= config.plumpSilverStripeModules[i] %>" : "dev-master"<% if (i < l - 1) { %>,<% } %>
+  		<% } %>
+  		<% for (i = 0, l = config.commonSilverStripeModules.length; i < l; i++) { %>
+  			<% if (i == 0) { %>,<% } %>"<%= config.commonSilverStripeModules[i] %>" : "dev-master"<% if (i < l - 1) { %>,<% } %>
   		<% } %>
 	},
 	"config": {

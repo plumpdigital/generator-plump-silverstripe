@@ -11,9 +11,23 @@ var util      = require('util'),
  *    Prepended with plumpss/ before being added as dependencies to composer.json
  */
 var plumpSilverStripeModules = [
-	'documents',
+	'googleanalytics',
+	'slacklogging',
+	'news',
+	'twitter',
 	'menus',
-	'news'
+	'documents'
+];
+
+/**
+ *   Often-used 3rd party modules.
+ */
+var commonSilverStripeModules = [
+	'undefinedoffset/sortablegridfield',
+	'unclecheese/betterbuttons',
+	'silverstripe-australia/gridfieldextensions',
+	'kinglozzer/metatitle',
+	'bummzack/sortablefile'
 ];
 
 /**
@@ -152,11 +166,17 @@ module.exports = generator.Base.extend({
 			choices : this._getModuleChoices(plumpSilverStripeModules, false)
 		},
 		{
+			type    : 'checkbox',
+			name    : 'commonSilverStripeModules',
+			message : 'Which additional SilverStripe modules do you require?',
+			choices : this._getModuleChoices(commonSilverStripeModules, false)
+		},
+		{
 			type    : 'input',
 			name    : 'themeName',
 			message : 'What do you want the theme to be called?',
 			filter  : this._filterLowercase,
-			default : this.appname
+			default : this.appname.replace(/\s/g, '-')
 		},{
 			type    : 'checkbox',
 			name    : 'inuitCssModules',
@@ -231,6 +251,7 @@ module.exports = generator.Base.extend({
 
 		// Template other configuration.
 		this.template('_gitignore', '.gitignore');
+		this.template('_scss-lint.yml', '.scss-lint.yml');
 
 		// Copy Gulpfile and template Gulp config.
 		this.copy('gulp/gulpfile.js', 'gulpfile.js');

@@ -1,0 +1,25 @@
+# Install client-side build dependencies
+echo 'Installing NPM & Bower dependencies.'
+npm install && bower install
+
+# Build required templates, CSS & JS
+echo 'Building initial prerequisite assets.'
+gulp build
+
+# Install server dependencies
+echo 'Installing SilverStripe and its dependencies.'
+cd build && composer install
+
+# Run VirtualBox image
+echo 'Initialising vagrant server and installing any required dependencies.'
+cd ../ && vagrant up
+
+# Build the database
+echo 'Building SilverStripe database.'
+vagrant ssh -c 'php /vagrant/build/framework/cli-script.php /dev/build flush=1'
+
+# Confirm build completed.
+echo 'Build successful!'
+
+# Launch default browser
+open 'http://localhost:8080'
