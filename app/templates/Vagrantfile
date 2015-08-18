@@ -14,13 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "centos-65-x64-virtualbox-nocm"
   config.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-nocm.box"
 
-  # By default, VirtualBox shares files between the host and guest operating systems
-  # using its own built-in sharing mechanism. While this method works across all types of hosts,
-  # it's incredibly slow, at least on Unix hosts. The solution is to use NFS, which is much faster.
-  # Required for NFS to work, pick any local IP
   config.vm.network :private_network, ip: '192.168.50.50'
-  # Use NFS for shared folders for better performance
-  config.vm.synced_folder '.', '/vagrant', nfs: true
 
   # How to make Vagrant performance not suck
   # Set values based on each individual host system:
