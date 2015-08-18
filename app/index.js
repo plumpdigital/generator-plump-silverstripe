@@ -156,7 +156,7 @@ module.exports = generator.Base.extend({
 			name    : 'themeName',
 			message : 'What do you want the theme to be called?',
 			filter  : this._filterLowercase,
-			default : this.appname
+			default : this.appname.replace(/\s/g, '-')
 		},{
 			type    : 'checkbox',
 			name    : 'inuitCssModules',
