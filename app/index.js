@@ -11,9 +11,23 @@ var util      = require('util'),
  *    Prepended with plumpss/ before being added as dependencies to composer.json
  */
 var plumpSilverStripeModules = [
-	'documents',
+	'googleanalytics',
+	'slacklogging',
+	'news',
+	'twitter',
 	'menus',
-	'news'
+	'documents'
+];
+
+/**
+ *   Often-used 3rd party modules.
+ */
+var commonSilverStripeModules = [
+	'undefinedoffset/sortablegridfield',
+	'unclecheese/betterbuttons',
+	'silverstripe-australia/gridfieldextensions',
+	'kinglozzer/metatitle',
+	'bummzack/sortablefile'
 ];
 
 /**
@@ -150,6 +164,12 @@ module.exports = generator.Base.extend({
 			name    : 'plumpSilverStripeModules',
 			message : 'Which Plump SilverStripe modules do you require?',
 			choices : this._getModuleChoices(plumpSilverStripeModules, false)
+		},
+		{
+			type    : 'checkbox',
+			name    : 'commonSilverStripeModules',
+			message : 'Which additional SilverStripe modules do you require?',
+			choices : this._getModuleChoices(commonSilverStripeModules, false)
 		},
 		{
 			type    : 'input',
