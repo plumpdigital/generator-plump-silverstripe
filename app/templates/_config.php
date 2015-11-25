@@ -21,8 +21,8 @@ HtmlEditorConfig::get('cms')->setOption('theme_advanced_styles', 'Lede=lede');
 
 GD::set_default_quality(80);
 
-// Add LiveReload if on dev.
+// Add LiveReload if on dev and not currently on an /admin URL.
 
-if (Director::isDev()) {
-	Requirements::javascript('http://localhost:35729/livereload.js?snipver=1');
+if (Director::isDev() && (strpos($_SERVER['REQUEST_URI'], '/admin') !== 0)) {
+    Requirements::javascript('http://localhost:35729/livereload.js?snipver=1');
 }
