@@ -1,6 +1,7 @@
 //    Gulp utility.
 var gulp    = require('gulp'),
-	gutil   = require('gulp-util');
+	gutil   = require('gulp-util'),
+	gulpif  = require('gulp-if');
 
 //    Requires.
 var express     = require('express'),
@@ -30,7 +31,8 @@ var config = require('./gulp-config.json'),
 	themeDirectory = config.themeDirectory;
 
 //    Load command-line arguments.
-var argv = require('yargs').argv;
+var argv = require('yargs').argv,
+	lint = (argv.lint !== undefined) ? argv.lint : true;
 
 /**
  *    Make error handling easier by outputting the error message
@@ -79,8 +81,8 @@ gulp.task('scripts', function() {
 	var outputDirectory = themeDirectory + 'js/';
 
 	return gulp.src(config.files.scripts) /* [1] */
-		.pipe(jshint()) /* [2] */
-		.pipe(jshint.reporter(stylish))
+		.pipe(gulpif(lint, jshint())) /* [2] */
+		.pipe(gulpif(lint, jshint.reporter(stylish)))
 		.pipe(concat('main.js')) /* [3] */
 		.pipe(gulp.dest(outputDirectory)) /* [4] */
 		.pipe(rename({ suffix : '.min' })) /* [5] */
@@ -107,9 +109,9 @@ gulp.task('scripts', function() {
  	var outputDirectory = themeDirectory + 'css/';
 
  	return gulp.src(config.files.styles) /* [1] */
- 		.pipe(scsslint({
+ 		.pipe(gulpif(lint, scsslint({
  			'config': '.scss-lint.yml'
- 		}))
+ 		})))
  		.pipe(sass({  /* [2] */
  			style : 'expanded',
  			onError: injectError
