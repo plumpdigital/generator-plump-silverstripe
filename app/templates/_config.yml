@@ -7,3 +7,18 @@ After:
 # YAML configuration for SilverStripe
 SSViewer:
   theme: '<%= config.themeName %>'
+
+# Allow .svg files in uploads.
+# Allow .svg files to be inserted as images in text editors
+# Note that the 'Image' class doesn't recognise SVGs as proper images, use 'File' instead.
+File:
+  allowed_extensions:
+    - svg
+  app_categories:
+    image:
+      - svg
+
+Image:
+  allowed_extensions:
+    - svg
+#
