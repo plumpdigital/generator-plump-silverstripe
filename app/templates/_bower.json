@@ -4,7 +4,7 @@
   
   "dependencies": {
   	<% for (var i = 0, l = config.inuitCssModules.length; i < l; i++) { %>
-  		"inuit-<%= config.inuitCssModules[i] %>" : "latest"<% if (i < l - 1 || config.plumpCssModules.length > 0)  { %>,<% } %>
+  		"inuit-<%= config.inuitCssModules[i] %>" : "latest"<% if (i < l - 1 || config.plumpCssModules.length > 0) { %>,<% } %>
   	<% } %>
     <% for (var i = 0, l = config.plumpCssModules.length; i < l; i++) { %>
   		"plumpcss-<%= config.plumpCssModules[i] %>" : "latest"<% if (i < l - 1) { %>,<% } %>
